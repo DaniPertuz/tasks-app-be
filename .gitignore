@@ -5,5 +5,5 @@ package-lock.json
 build/
 coverage/
 dist/
-mongo/
+/mongo/
 yarn.lock
