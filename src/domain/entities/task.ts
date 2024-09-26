@@ -1,7 +1,7 @@
 import { ITask, TaskStatus } from '../../interfaces';
 
 export class TaskEntity {
-  public id?: number;
+  public id?: string;
   public title: string;
   public body: string;
   public status?: TaskStatus;
