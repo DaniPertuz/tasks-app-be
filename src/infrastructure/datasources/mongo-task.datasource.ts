@@ -1,15 +1,14 @@
 import { TaskModel } from '../../data/mongo';
 import { TaskDatasource } from '../../domain/datasources/task.datasource';
 import { TaskEntity } from '../../domain/entities/task';
-import { TaskStatus } from '../../interfaces';
 
 export class MongoTaskDatasource implements TaskDatasource {
 
   async createTask(task: TaskEntity): Promise<TaskEntity | null> {
-    const { title, body } = task;
+    const { title, body, status } = task;
 
     const newTask = await TaskModel.create({
-      title, body, status: TaskStatus.Pending
+      title, body, status
     });
 
     return TaskEntity.fromObject(newTask);

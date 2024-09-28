@@ -8,14 +8,14 @@ export class TasksController {
   );
 
   public createTask = async (req: Request, res: Response) => {
-    const { title, body } = req.body;
+    const { title, body, status } = req.body;
 
     try {
       if (!title || !body) {
         return res.status(400).json({ message: 'Título y descripción son campos requeridos' });
       }
 
-      const newTask = await this.taskRepo.createTask({ title, body });
+      const newTask = await this.taskRepo.createTask({ title, body, status });
       return res.status(201).json(newTask);
     } catch (error) {
       return res.status(500).json({ message: 'Error al crear task', error });
@@ -49,7 +49,7 @@ export class TasksController {
 
   public updateTask = async (req: Request, res: Response) => {
     const id = req.params.id;
-    const { title, body } = req.body;
+    const { title, body, status } = req.body;
 
     try {
       const task = await this.taskRepo.getTask(id);
@@ -58,7 +58,7 @@ export class TasksController {
         return res.status(404).json({ message: 'Task no encontrada' });
       }
 
-      const updateTask = await this.taskRepo.updateTask(id, { title, body });
+      const updateTask = await this.taskRepo.updateTask(id, { title, body, status });
       return res.json(updateTask);
     } catch (error) {
       return res.status(500).json({ message: 'Error al actualizar task', error });
