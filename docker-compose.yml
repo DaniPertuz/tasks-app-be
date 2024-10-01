@@ -1,6 +1,13 @@
-version: '3.8'
 
 services:
+  app:
+    build: .
+    ports:
+      - '3300:3300'
+    depends_on:
+      - mongo-db
+    environment:
+      - MONGO_URL=${MONGO_URL}
   mongo-db:
     image: mongo:6.0.6
     restart: always
